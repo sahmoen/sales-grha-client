@@ -4,7 +4,8 @@ import Login from "../views/Login.vue";
 import Register from "../views/Register.vue";
 import History from "../components/TableHistory.vue";
 import AddSales from "../views/AddSales.vue";
-import PieChart from "../components/PieChart.vue";
+import Product from "../components/TableProduct.vue";
+import ErrorPage from "../views/ErrorPage.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -35,9 +36,14 @@ const router = createRouter({
       component: AddSales,
     },
     {
-      path: "/pie",
-      name: "pieChart",
-      component: PieChart,
+      path: "/product",
+      name: "product",
+      component: Product,
+    },
+    {
+      path: "/:pathMatch(.*)*",
+      name: "errPage",
+      component: ErrorPage,
     },
   ],
 });
@@ -49,6 +55,10 @@ router.beforeEach((to, from) => {
   } else if (!isLogin && to.name === "home") {
     return { name: "login" };
   } else if (!isLogin && to.name === "history") {
+    return { name: "login" };
+  } else if (!isLogin && to.name === "product") {
+    return { name: "login" };
+  } else if (!isLogin && to.name === "addSales") {
     return { name: "login" };
   }
   return true;

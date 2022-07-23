@@ -11,8 +11,13 @@ export default {
     ...mapState(useSalesStore, ["sales"]),
   },
   methods: {
-    ...mapActions(useSalesStore, ["editSales"]),
+    ...mapActions(useSalesStore, ["fetchData", "editSales", "deleteSale"]),
     toEdit() {
+      this.$router.push("/");
+    },
+    toDelete(id) {
+      this.deleteSale(id);
+      this.fetchData();
       this.$router.push("/");
     },
   },
@@ -20,7 +25,7 @@ export default {
 </script>
 
 <template>
-  <h2>Table Sales</h2>
+  <h2>Sales</h2>
   <table class="table table-hover">
     <thead>
       <tr>
@@ -39,7 +44,7 @@ export default {
         <td>{{ list.sold }}</td>
         <td>
           <button type="button" class="btn btn-outline-warning" style="margin-right: 1rem">Edit</button>
-          <button type="button" class="btn btn-outline-danger">Delete</button>
+          <button @click.prevent="toDelete(list.id)" type="button" class="btn btn-outline-danger">Delete</button>
         </td>
       </tr>
     </tbody>

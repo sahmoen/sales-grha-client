@@ -14,10 +14,11 @@ export default {
     new Chart(document.getElementById("testPie"), {
       type: "pie",
       data: {
-        labels: ["Nike", "Adidas", "Puma", "Nike", "Adidas", "Puma"],
+        labels: ["Produk A", "Produk B", "Produk C", "Produk D", "Produk E", "Produk F"],
         datasets: [
           {
-            backgroundColor: ["#1C3FAA", "#F05252", "#6b7280", "#1C3FAA", "#F05252", "#6b7280"],
+            backgroundColor: ["#1C3FAA", "#F05252", "#6b7280", "#ff6384", "#36a2eb", "#cc65fe"],
+            hoverOffset: 4,
             data: this.sold,
           },
         ],
@@ -26,7 +27,7 @@ export default {
         maintainAspectRatio: false,
         title: {
           display: true,
-          text: "Ranking",
+          text: "Sales",
         },
       },
     });

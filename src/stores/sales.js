@@ -1,5 +1,6 @@
 import { defineStore } from "pinia";
 import axios from "axios";
+import Swal from "sweetalert2";
 
 export const useSalesStore = defineStore({
   id: "sales",
@@ -31,11 +32,6 @@ export const useSalesStore = defineStore({
         return true;
       } catch (err) {
         console.log(err);
-        // Swal.fire({
-        //   icon: "error",
-        //   title: `Oops...`,
-        //   text: `${err.response.data.message}`,
-        // });
         return false;
       }
     },
@@ -47,14 +43,13 @@ export const useSalesStore = defineStore({
           url: this.baseUrl + "/registerAdmin",
           data: data,
         });
-        // Swal.fire("Thank You for Register!", "Please Login!", "success");
       } catch (err) {
         console.log(err);
-        // Swal.fire({
-        //   icon: "error",
-        //   title: `Oops...`,
-        //   text: `${err.response.data.message}`,
-        // });
+        Swal.fire({
+          icon: "error",
+          title: `Oops...`,
+          text: `${err.response.data.message}`,
+        });
       }
     },
 
@@ -141,11 +136,6 @@ export const useSalesStore = defineStore({
       } catch (err) {
         console.log(err);
         this.$router.push(`/`);
-        // Swal.fire({
-        //   icon: "error",
-        //   title: `Oops...`,
-        //   text: `${err.response.data.message}`,
-        // });
       }
     },
 
@@ -159,6 +149,22 @@ export const useSalesStore = defineStore({
           },
         });
         console.log(response);
+      } catch (err) {
+        console.log(err);
+      }
+    },
+
+    async deleteSale(id) {
+      try {
+        let response = await axios({
+          method: "DELETE",
+          url: this.baseUrl + `/sales/${id}`,
+          headers: {
+            access_token: localStorage.getItem("access_token"),
+          },
+        });
+        // console.log(response);
+        this.fetchData();
       } catch (err) {
         console.log(err);
       }

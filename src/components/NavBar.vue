@@ -1,6 +1,15 @@
 <script>
+import { useSalesStore } from "../stores/sales";
+import { mapActions } from "pinia";
 export default {
   name: "NavBar",
+  methods: {
+    ...mapActions(useSalesStore, ["fetchProduct"]),
+    toAddSales() {
+      this.$router.push(`/addSales`);
+      this.fetchProduct();
+    },
+  },
 };
 </script>
 
@@ -15,7 +24,7 @@ export default {
         <i class="fas fa-align-justify"></i>
       </button>
 
-      <button class="btn btn-info" style="margin-left: 2rem">Add</button>
+      <button class="btn btn-info" style="margin-left: 2rem" @click.prevent="toAddSales">Add</button>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="nav navbar-nav ml-auto">
           <form class="d-flex" role="search">

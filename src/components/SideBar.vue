@@ -21,6 +21,10 @@ export default {
       this.$router.push(`/addSales`);
       this.fetchProduct();
     },
+    toProduct() {
+      this.$router.push(`/product`);
+      this.fetchProduct();
+    },
   },
   computed: {
     ...mapState(useSalesStore, ["userName"]),
@@ -52,7 +56,7 @@ export default {
             <a href="#">User</a>
           </li>
           <li>
-            <a href="#">Product</a>
+            <a @click.prevent="toProduct" href="">Product</a>
           </li>
         </ul>
       </li>
